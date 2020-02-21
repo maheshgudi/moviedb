@@ -15,6 +15,10 @@ class Movie(models.Model):
     def __str__(self):
         return f"Movie: {self.name}"
 
+    @property
+    def genres(self):
+        return self.genre.values_list('name', flat=True)
+
 
 class Genre(models.Model):
 
