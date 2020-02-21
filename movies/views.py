@@ -11,7 +11,7 @@ from .serializers import MovieSerializer
 
 class MovieList(APIView):
     def get(self, request, format=None):
-        movies = Movie.objects.all()
+        movies = Movie.objects.all().order_by("-popularity")
         serializer = MovieSerializer(movies, many=True)
         return Response(serializer.data)
 
