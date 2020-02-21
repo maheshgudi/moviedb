@@ -20,7 +20,6 @@ class Command(BaseCommand):
 
     def handle(self, *args, **options):
         file = options.get("movie_file")[1]
-        print(file)
         with open(file, 'r') as movie_file:
             json_movies = movie_file.read()
             movies = json.loads(json_movies)
@@ -39,3 +38,4 @@ class Command(BaseCommand):
                     genre, created = Genre.objects.get_or_create(name=name)
                     genres.append(genre)
                 movie.genre.add(*genres)
+        print("Added Movies")
