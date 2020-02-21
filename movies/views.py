@@ -15,6 +15,24 @@ class MovieList(APIView):
         return Response(serializer.data)
 
 
+class SearchMovie(APIView):
+    def get(self, request, format=None):
+        query = request.GET.dict()
+        try:
+            movies = Movie.objects.search_movie_by_field(**query)
+        except ValueError:
+            return Response(
+                status=status.HTTP_400_BAD_REQUEST,
+                data={"message": "Bad Query Arguement"})
+        if movies:
+            serializer = MovieSerializer(movies, many=True)
+            return Response(serializer.data)
+        else:
+            return Response(
+                status=status.HTTP_400_BAD_REQUEST,
+                data={"message": "Query parameter does not exist"})
+
+
 class AddMovie(APIView):
 
     def post(self, request, format=None):
@@ -50,3 +68,5 @@ class MovieDetail(APIView):
 class AdminPanel(APIView):
     def post(self, request):
         pass
+
+

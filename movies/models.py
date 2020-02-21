@@ -1,7 +1,19 @@
 from django.core.validators import MaxValueValidator, MinValueValidator
 from django.contrib.auth.models import User
 from django.db import models
+from .search_query_builder import build_query
 
+
+
+class MovieManager(models.Manager):
+
+    def search_movie_by_field(self, **kwargs):
+        query = build_query(kwargs)
+        if query:
+            try:
+                return self.filter(**query)
+            except ValueError:
+                raise
 
 
 class Movie(models.Model):
@@ -11,6 +23,7 @@ class Movie(models.Model):
     imdb_score = models.FloatField(validators=[MinValueValidator(0.0), MaxValueValidator(10.0)])
     popularity = models.FloatField(validators=[MinValueValidator(0.0), MaxValueValidator(100.0)])
     genre = models.ManyToManyField("Genre")
+    objects = MovieManager()
 
     def __str__(self):
         return f"Movie: {self.name}"
