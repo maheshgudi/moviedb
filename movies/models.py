@@ -1,6 +1,9 @@
+import uuid
+
 from django.core.validators import MaxValueValidator, MinValueValidator
 from django.contrib.auth.models import User
 from django.db import models
+
 from .search_query_builder import build_query
 
 
@@ -23,6 +26,7 @@ class Movie(models.Model):
     imdb_score = models.FloatField(validators=[MinValueValidator(0.0), MaxValueValidator(10.0)])
     popularity = models.FloatField(validators=[MinValueValidator(0.0), MaxValueValidator(100.0)])
     genre = models.ManyToManyField("Genre")
+    movie_id = models.UUIDField(unique=True, default=uuid.uuid4, editable=False)
     objects = MovieManager()
 
     def __str__(self):

@@ -1,0 +1,88 @@
+openapi: 3.0.2
+info:
+  title: ''
+  version: ''
+paths:
+  /api/allmovies/:
+    get:
+      operationId: listMovies
+      description: ''
+      parameters: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items: {}
+          description: ''
+  /api/movie/{id}:
+    get:
+      operationId: RetrieveMovieDetail
+      description: ''
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: ''
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema: {}
+          description: ''
+    put:
+      operationId: UpdateMovieDetail
+      description: ''
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: ''
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema: {}
+          description: ''
+    delete:
+      operationId: DestroyMovieDetail
+      description: ''
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: ''
+        schema:
+          type: string
+      responses:
+        '204':
+          description: ''
+  /api/search/:
+    get:
+      operationId: listSearchMovies
+      description: ''
+      parameters: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items: {}
+          description: ''
+  /api/add/movie/:
+    post:
+      operationId: CreateAddMovie
+      description: ''
+      parameters: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema: {}
+          description: ''

@@ -15,8 +15,11 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from django.views.generic.base import RedirectView
+from django.urls import reverse_lazy
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('api/', include('movies.urls')),
+	path('', RedirectView.as_view(url=reverse_lazy('openapi-schema.yml'))),
+    path('admin/', admin.site.urls, name="admin"),
+    path('api/', include('movies.urls'), name="api"),
 ]
