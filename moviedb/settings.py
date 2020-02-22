@@ -46,6 +46,7 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -133,3 +134,6 @@ STATIC_ROOT = os.path.join(BASE_DIR, "static/")
 import dj_database_url 
 testing_db  =  dj_database_url.config(conn_max_age=600)
 DATABASES['default'].update(testing_db)
+
+# Add whitenoise for hosting static from CDN
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
