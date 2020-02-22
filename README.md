@@ -1,6 +1,6 @@
 # Django Movie DB API
 
-# @Note to self: add django custom management commands and stuff on how to deploy on heroku
+@Note to self: add django custom management commands and stuff on how to deploy on heroku
 
 # REST API Documentation 
 
@@ -37,11 +37,13 @@ Following JSON Fields
 
 ##### Returns
 If `Username` and/or `email` is not registered previously, User is created and token is returned, as shown below,
-    ```
+
+```
 {'token': <token_id>,
  'status': True,
  'message': 'User created successfully'}
 ```
+
 **Note: Please save the token and use it for all future API calls.**
 
 
@@ -50,6 +52,7 @@ If `Username` and/or `email` is not registered previously, User is created and t
 ##### Expects
 
 Add in JSON request Header
+
 ```
 {'Authorization': 'token <token_id>'}
 ```
@@ -66,6 +69,7 @@ Returns all movies stored in the db as in `JSON` format.
 ##### Expects
 
 Add in JSON request Header
+
 ```
 {'Authorization': 'token <token_id>'}
 ```
@@ -73,6 +77,7 @@ Add in JSON request Header
 ##### Returns 
 
 Returns the Movie details.
+
 ```
 {
     "status":true,
@@ -90,6 +95,7 @@ Returns the Movie details.
 ##### Expects
 
 Add in JSON request Header
+
 ```
 {'Authorization': 'token <token_id>'}
 ```
@@ -97,6 +103,7 @@ Add in JSON request Header
 ##### Returns 
 
 Returns the Movie details.
+
 ```
 {
     "status":true,
