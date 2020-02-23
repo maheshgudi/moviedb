@@ -51,12 +51,12 @@ class MovieDetail(APIView):
     # add get object or 404 to get movie object
 
     GROUP_NAME = "Administrator"
-    GROUP = get_object_or_404(Group, name=GROUP_NAME)
 
     def verify_admin_user(self, user):
         context = {}
+        group = get_object_or_404(Group, name=self.GROUP_NAME)
         if (user.is_anonymous or not
-                self.GROUP.user_set.filter(id=user.id).exists()):
+                group.user_set.filter(id=user.id).exists()):
             context.update({"status": False, "message": "Unauthorized access"})
             status_code = status.HTTP_400_BAD_REQUEST
         else:
