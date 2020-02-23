@@ -1,6 +1,31 @@
 # Django Movie DB API
 
-@Note to self: add django custom management commands and stuff on how to deploy on heroku
+
+# Installation
+
+1. Git clone the repo `https://github.com/maheshgudi/moviedb` or via ssh through `git@github.com:maheshgudi/moviedb.git`
+
+2. Set-up and activate a **python3** virtualenv. preferably python3.7.6 or higher. Run `pip install -r requirements.txt` to install
+   dependencies.
+
+3. Run the server by running the command ```python manage.py runserver```. Run migrations beforehand.
+
+4. Run the following command to upload sample files.
+
+```
+python manage.py upload_movies movie_file movies/imdb.json
+```
+
+5. Create superuser using the command `python manage.py createsuperuser`.
+
+6. Login into the admin panel and create a group `Administrator` with all permissions for `Movie` Model. 
+
+7. Admin can add registered users into the `Administrator` group. The user can then be able to create, delete, and update movie from API endpoints.
+
+8. Admin password is `username-admin, password-admin` to access the heroku server for the same.
+
+9. Heroku API server can be found on the following <https://django-moviedb.herokuapp.com/>
+
 
 # REST API Documentation 
 
