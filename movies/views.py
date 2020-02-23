@@ -62,13 +62,18 @@ class MovieDetail(APIView):
             status_code = status.HTTP_200_OK
         return context, status_code 
 
-    def get(self, request, movie_id):
+    def get(self, request, movie_id=None):
         user = request.user
         context, status_code = self.verify_admin_user(user)
-        if status_code == status.HTTP_200_OK:
-            movie = get_object_or_404(Movie, movie_id=movie_id)
-            serializer = MovieSerializer(movie)
-            context["data"] = serializer.data
+        if movie_id:
+            if status_code == status.HTTP_200_OK:
+                movie = get_object_or_404(Movie, movie_id=movie_id)
+                serializer = MovieSerializer(movie)
+                context["data"] = serializer.data
+        else:
+            status_code = status.HTTP_400_BAD_REQUEST
+            context["status"] = False
+            context["message"] = "This requires a movie id"
         return Response(context, status=status_code)
 
     def post(self, request, movie_id=None):
@@ -76,9 +81,14 @@ class MovieDetail(APIView):
         context, status_code = self.verify_admin_user(user)
         if status_code == status.HTTP_200_OK:
             movieutils = MovieUtils(request.data)
-            added = movieutils.add_movies()
-            serializer = MovieSerializer(movieutils.add_movies(), many=True)
-            context["data"] = serializer.data
+            add_status, added = movieutils.add_movies()
+            if add_status:
+                serializer = MovieSerializer(movieutils.add_movies(), many=True)
+                context["data"] = serializer.data
+            else:
+                status_code = status.HTTP_400_BAD_REQUEST
+                context["status"] = False
+                context["message"] = "Unable to parse Json fields. Please check"
         return Response(context, status=status_code)
 
     def put(self, request, movie_id):

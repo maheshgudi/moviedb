@@ -19,7 +19,7 @@ from django.views.generic.base import RedirectView
 from django.urls import reverse_lazy
 
 urlpatterns = [
-	path('', RedirectView.as_view(url=reverse_lazy('openapi-schema.yml'))),
+	path('', RedirectView.as_view(url=reverse_lazy('movies:openapi-schema.yml'))),
     path('admin/', admin.site.urls, name="admin"),
     path('api/', include('movies.urls'), name="api"),
 ]
