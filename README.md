@@ -155,9 +155,6 @@ Returns the Movie details.
 ```
 
 
-### `/api/movies/`
-**Note: User needs to be an admin and have a admin token to be able to access this feature.**
-
 #### POST Method
 
 ##### Expects
@@ -171,13 +168,55 @@ Add in JSON request Header
 and add in POST body
 
 ```
-
+[
+  {
+    "99popularity": 83.0,
+    "director": "Mahesh Gudi",
+    "genre": [
+      "Adventure",
+      " Family",
+      " Fantasy",
+      " Musical"
+    ],
+    "imdb_score": 8.3,
+    "name": "The Wizard of Oz"
+  },
+  {
+    "99popularity": 88.0,
+    "director": "Mahesh Gudi",
+    "genre": [
+      "Action",
+      " Adventure",
+      " Fantasy",
+      " Sci-Fi"
+    ],
+    "imdb_score": 8.8,
+    "name": "Star Wars"
+  }
+]
 ```
 
 
 ##### Returns 
 
 Returns the Movie details.
+
+```
+{'status': True,
+ 'data': [{'movie_id': 'da00e02a-7b8b-4aeb-af48-60e35c2d7d41',
+   'name': 'The Wizard of Oz',
+   'director': 'Mahesh Gudi',
+   'imdb_score': 8.3,
+   'popularity': 83.0,
+   'genres': ['Adventure', 'Family', 'Fantasy', 'Musical']},
+  {'movie_id': '235835bb-33fa-48d5-aafc-4412930ecbda',
+   'name': 'Star Wars',
+   'director': 'Mahesh Gudi',
+   'imdb_score': 8.8,
+   'popularity': 88.0,
+   'genres': ['Adventure', 'Fantasy', 'Action', 'Sci-Fi']}]}
+
+```
 
 
 ### `/api/search/?<name|director|imdb_score|popularity|genre>`

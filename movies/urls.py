@@ -4,6 +4,8 @@ from . import views
 
 from rest_framework.schemas import get_schema_view
 
+app_name = "movies"
+
 urlpatterns = [
 	path('', get_schema_view(
         title="Django Movie DB",

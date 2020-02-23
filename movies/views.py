@@ -71,7 +71,7 @@ class MovieDetail(APIView):
             context["data"] = serializer.data
         return Response(context, status=status_code)
 
-    def post(self, request):
+    def post(self, request, movie_id=None):
         user = request.user
         context, status_code = self.verify_admin_user(user)
         if status_code == status.HTTP_200_OK:
