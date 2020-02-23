@@ -126,14 +126,15 @@ and add in PUT body add
 
 ```
 {
-    "status":true,
     "movie_id":"74826d60-6c42-4221-86a9-d283ed6f6946",
     "name":"The Wizard of Oz",
-    "director":"Victor Fleming",
+    "director":"Victor Fleming, Mahesh Gudi",
     "imdb_score":8.3,
     "popularity":83.0,
     "genres":["Adventure","Family","Fantasy","Musical"]
 }
+NOTE: Director name is being updated with this POST Body. One can ignore movie_id while posting.
+If however, one does add a movie id, it will still not update the original movie id.
 ```
 
 
@@ -144,6 +145,11 @@ Returns the Movie details.
 ```
 {
     "status":true,
-    "message":"<movie_name> deleted successfully"
+    "movie_id":"74826d60-6c42-4221-86a9-d283ed6f6946",
+    "name":"The Wizard of Oz",
+    "director":"Victor Fleming, Mahesh Gudi",
+    "imdb_score":8.3,
+    "popularity":83.0,
+    "genres":["Adventure","Family","Fantasy","Musical"]
 }
 ```
