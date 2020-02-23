@@ -6,7 +6,7 @@ paths:
   /api/allmovies/:
     get:
       operationId: listMovies
-      description: ''
+      description: API to get all movies in the database.
       parameters: []
       responses:
         '200':
@@ -16,12 +16,28 @@ paths:
                 type: array
                 items: {}
           description: ''
-  /api/movie/{id}:
+  /api/movie/{movie_id}/:
     get:
       operationId: RetrieveMovieDetail
-      description: ''
+      description: API only for admin to get, delete and update the movie info
       parameters:
-      - name: id
+      - name: movie_id
+        in: path
+        required: true
+        description: ''
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema: {}
+          description: ''
+    post:
+      operationId: CreateMovieDetail
+      description: API only for admin to get, delete and update the movie info
+      parameters:
+      - name: movie_id
         in: path
         required: true
         description: ''
@@ -35,9 +51,9 @@ paths:
           description: ''
     put:
       operationId: UpdateMovieDetail
-      description: ''
+      description: API only for admin to get, delete and update the movie info
       parameters:
-      - name: id
+      - name: movie_id
         in: path
         required: true
         description: ''
@@ -51,14 +67,54 @@ paths:
           description: ''
     delete:
       operationId: DestroyMovieDetail
-      description: ''
+      description: API only for admin to get, delete and update the movie info
       parameters:
-      - name: id
+      - name: movie_id
         in: path
         required: true
         description: ''
         schema:
           type: string
+      responses:
+        '204':
+          description: ''
+  /api/movie/:
+    get:
+      operationId: listMovieDetails
+      description: API only for admin to get, delete and update the movie info
+      parameters: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items: {}
+          description: ''
+    post:
+      operationId: CreateMovieDetail
+      description: API only for admin to get, delete and update the movie info
+      parameters: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema: {}
+          description: ''
+    put:
+      operationId: UpdateMovieDetail
+      description: API only for admin to get, delete and update the movie info
+      parameters: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema: {}
+          description: ''
+    delete:
+      operationId: DestroyMovieDetail
+      description: API only for admin to get, delete and update the movie info
+      parameters: []
       responses:
         '204':
           description: ''
@@ -75,10 +131,10 @@ paths:
                 type: array
                 items: {}
           description: ''
-  /api/add/movie/:
+  /api/register/:
     post:
-      operationId: CreateAddMovie
-      description: ''
+      operationId: CreateRegister
+      description: API to register user and generate token
       parameters: []
       responses:
         '200':

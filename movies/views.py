@@ -36,8 +36,7 @@ class SearchMovie(APIView):
                 data={"message": "Bad Query Argument", "status": False})
         if movies:
             serializer = MovieSerializer(movies, many=True)
-            context = {"status": True}
-            context.update(serializer.data)
+            context = {"status": True, "data": serializer.data}
             return Response(context)
         else:
             return Response(
@@ -48,7 +47,6 @@ class SearchMovie(APIView):
 
 class MovieDetail(APIView):
     """ API only for admin to get, delete and update the movie info """
-    # add get object or 404 to get movie object
 
     GROUP_NAME = "Administrator"
 
@@ -64,14 +62,13 @@ class MovieDetail(APIView):
             status_code = status.HTTP_200_OK
         return context, status_code 
 
-
     def get(self, request, movie_id):
         user = request.user
         context, status_code = self.verify_admin_user(user)
         if status_code == status.HTTP_200_OK:
             movie = get_object_or_404(Movie, movie_id=movie_id)
             serializer = MovieSerializer(movie)
-            context.update(serializer.data)
+            context["data"] = serializer.data
         return Response(context, status=status_code)
 
     def post(self, request):
@@ -81,8 +78,8 @@ class MovieDetail(APIView):
             movieutils = MovieUtils(request.data)
             added = movieutils.add_movies()
             serializer = MovieSerializer(movieutils.add_movies(), many=True)
-            context.update(serializer.data)
-            return Response(context, status=status_code)
+            context["data"] = serializer.data
+        return Response(context, status=status_code)
 
     def put(self, request, movie_id):
         user = request.user
@@ -92,9 +89,9 @@ class MovieDetail(APIView):
             serializer = MovieSerializer(movie, data=request.data)
             if serializer.is_valid():
                 serializer.save()
-                context.update(serializer.data)
+                context["data"] = serializer.data
             else:
-                context.update(serializer.errors)
+                context["errors"] = serializer.errors
         return Response(context, status=status_code)
 
     def delete(self, request, movie_id):
@@ -107,7 +104,6 @@ class MovieDetail(APIView):
             "message": f"{movie.name} deleted successfully"
             }
             movie.delete()
-            status_code = status.HTTP_200_OK
         return Response(context, status=status_code)
 
 
@@ -129,4 +125,3 @@ class Register(APIView):
             context = {"status": False}
             context.update(serializer.errors)
         return Response(context)
-

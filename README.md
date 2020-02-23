@@ -122,7 +122,7 @@ Add in JSON request Header
 {'Authorization': 'token <token_id>'}
 ```
 
-and add in PUT body add 
+and add in PUT body
 
 ```
 {
@@ -151,5 +151,108 @@ Returns the Movie details.
     "imdb_score":8.3,
     "popularity":83.0,
     "genres":["Adventure","Family","Fantasy","Musical"]
+}
+```
+
+
+### `/api/movies/`
+**Note: User needs to be an admin and have a admin token to be able to access this feature.**
+
+#### POST Method
+
+##### Expects
+
+Add in JSON request Header
+
+```
+{'Authorization': 'token <token_id>'}
+```
+
+and add in POST body
+
+```
+
+```
+
+
+##### Returns 
+
+Returns the Movie details.
+
+
+### `/api/search/?<name|director|imdb_score|popularity|genre>`
+**Note: Any user can search for movies. No authentication token required.**
+
+#### GET Method
+
+##### Expects
+
+Search for the following get parameters i.e. `name, director, imdb_score, popularity, genre`. One can search with only one params or even many.
+Each param can have only one value.
+For e.g. -
+
+```
+GET /api/search/?director=martin
+```
+
+will return 
+
+```
+{
+    "status": true,
+    "data": [
+        {
+            "movie_id": "f11ec718-ee06-4175-9bc4-be093e37ec18",
+            "name": "Taxi Driver",
+            "director": "Martin Scorsese",
+            "imdb_score": 8.6,
+            "popularity": 86.0,
+            "genres": [
+                "Drama",
+                "Thriller"
+            ]
+        },
+        {
+            "movie_id": "b3c3ac74-915c-4107-8273-25f1494b2d78",
+            "name": "Goodfellas",
+            "director": "Martin Scorsese",
+            "imdb_score": 8.8,
+            "popularity": 88.0,
+            "genres": [
+                "Drama",
+                "Thriller",
+                "Crime"
+            ]
+        }
+    ]
+}
+```
+
+While adding more query params 
+
+
+```
+GET /api/search/?director=martin?name=good
+```
+
+will return 
+
+```
+{
+    "status": true,
+    "data": [
+        {
+            "movie_id": "b3c3ac74-915c-4107-8273-25f1494b2d78",
+            "name": "Goodfellas",
+            "director": "Martin Scorsese",
+            "imdb_score": 8.8,
+            "popularity": 88.0,
+            "genres": [
+                "Drama",
+                "Thriller",
+                "Crime"
+            ]
+        }
+    ]
 }
 ```
