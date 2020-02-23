@@ -42,13 +42,13 @@ Returns the `OpenAPI Schema` for the API. This is useful to discover and underst
 ### `/admin/`
 
 ##### Returns
-Used to login into the Django admin panel. All models are registered in the admin page.
+Login into the Django admin panel. All models are registered in the admin page.
 
-### `api/register/`
+### `POST api/register/`
 
 ##### Expects
 
-Following JSON Fields
+Add following JSON Fields in the POST Body.
 
 ```
 {
@@ -69,10 +69,11 @@ If `Username` and/or `email` is not registered previously, User is created and t
  'message': 'User created successfully'}
 ```
 
-**Note: Please save the token and use it for all future API calls.**
+**Note: Please save the token and use it in the headers for all future API calls.**
 
 
-### `/api/allmovies/`
+### `GET /api/allmovies/`
+**Note: User needs to be registered to be able to access this feature.**
 
 ##### Expects
 
@@ -86,10 +87,8 @@ Add in JSON request Header
 Returns all movies stored in the db as in `JSON` format. 
 
 
-### `/api/movies/<movie_id>`
+### `GET /api/movies/<movie_id>`
 **Note: User needs to be an admin and have a admin token to be able to access this feature.**
-
-#### GET Method
 
 ##### Expects
 
@@ -115,7 +114,7 @@ Returns the Movie details.
 }
 ```
 
-#### DELETE Method
+### `DELETE /api/movies/<movie_id>`
 
 ##### Expects
 
@@ -127,7 +126,7 @@ Add in JSON request Header
 
 ##### Returns 
 
-Returns the Movie details.
+Returns the deleted movie details.
 
 ```
 {
@@ -137,7 +136,7 @@ Returns the Movie details.
 ```
 
 
-#### PUT Method
+### `PUT /api/movies/<movie_id>`
 
 ##### Expects
 
@@ -180,7 +179,7 @@ Returns the Movie details.
 ```
 
 
-#### POST Method
+### `POST /api/movies/`
 
 ##### Expects
 
@@ -244,10 +243,8 @@ Returns the Movie details.
 ```
 
 
-### `/api/search/?<name|director|imdb_score|popularity|genre>`
+### `GET /api/search/?<name|director|imdb_score|popularity|genre>`
 **Note: Any user can search for movies. No authentication token required.**
-
-#### GET Method
 
 ##### Expects
 
