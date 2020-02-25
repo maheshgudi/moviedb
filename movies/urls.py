@@ -14,8 +14,8 @@ urlpatterns = [
     ), name='openapi-schema.yml'),
 
     path('allmovies/', views.MovieList.as_view(), name="movies"),
-    path('movie/<uuid:movie_id>/', views.MovieDetail.as_view(), name="movie"),
-    path('movie/', views.MovieDetail.as_view(), name="movie"),
+    path('movies/<uuid:movie_id>/', views.MovieDetail.as_view(), name="movie"),
+    path('movies/', views.MovieDetail.as_view(), name="movie"),
     path('search/', views.SearchMovie.as_view(), name="search"),
     path('register/', views.Register.as_view(), name="register_user"),
 
