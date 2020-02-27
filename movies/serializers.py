@@ -57,17 +57,3 @@ class RegistrationSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = ("username", "email", "first_name", "last_name", "password")
-
-# class TokenSerializer(serializers.ModelSerializer):
-#     username = serializers.CharField(
-#         validators=[
-#         UniqueValidator(
-#             queryset=User.objects.all(), message="Username already exists"
-#             )
-#         ]
-#     )
-#     password = serializers.CharField(min_length=6)
-
-#     class Meta:
-#         model = tOKE
-#         fields = ("username", "email", "first_name", "last_name", "password")
