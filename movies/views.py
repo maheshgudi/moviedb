@@ -83,7 +83,7 @@ class MovieDetail(APIView):
             movieutils = MovieUtils(request.data)
             add_status, added = movieutils.add_movies()
             if add_status:
-                serializer = MovieSerializer(movieutils.add_movies(), many=True)
+                serializer = MovieSerializer(added, many=True)
                 context["data"] = serializer.data
             else:
                 status_code = status.HTTP_400_BAD_REQUEST
