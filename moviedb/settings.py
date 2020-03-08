@@ -28,7 +28,7 @@ SECRET_KEY = config(
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = config("DEBUG", default=True, cast=bool)
 
-ALLOWED_HOSTS = config("ALLOWED_HOSTS", default="localhost", cast=Csv())
+ALLOWED_HOSTS = config("ALLOWED_HOSTS", default="127.0.0.1", cast=Csv())
 
 
 # Application definition
@@ -81,12 +81,15 @@ WSGI_APPLICATION = 'moviedb.wsgi.application'
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+    "default": {
+        "ENGINE": "django.db.backends.postgresql",
+        "NAME": config("DB_NAME", default="moviedb", cast=str),
+        "USER": config("DB_USER", default="root", cast=str),
+        "PASSWORD": config("DB_PASSWORD", default="root", cast=str),
+        "HOST": config("DB_HOST", default="db", cast=str),
+        "PORT": config("DB_PORT", default=5432, cast=int),
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/3.0/ref/settings/#auth-password-validators
@@ -131,9 +134,9 @@ STATIC_ROOT = os.path.join(BASE_DIR, "static/")
 
 # add Heroku postgres sql
 
-import dj_database_url 
-testing_db  =  dj_database_url.config(conn_max_age=600)
-DATABASES['default'].update(testing_db)
+# import dj_database_url 
+# testing_db  =  dj_database_url.config(conn_max_age=600)
+# DATABASES['default'].update(testing_db)
 
 # Add whitenoise for hosting static from CDN
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
