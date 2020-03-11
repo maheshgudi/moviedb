@@ -10,7 +10,7 @@ RUN apt update -y && apt upgrade -y
 
 RUN pip install -r requirements.txt 
 
-RUN python manage.py migrate
+RUN python manage.py migrate && python manage.py upload_movies movie_file movies/imdb.json
 
 EXPOSE 8000
 
