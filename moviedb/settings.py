@@ -28,7 +28,7 @@ SECRET_KEY = config(
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = config("DEBUG", default=True, cast=bool)
 
-ALLOWED_HOSTS = config("ALLOWED_HOSTS", default="127.0.0.1", cast=Csv())
+ALLOWED_HOSTS = config("ALLOWED_HOSTS", default="*", cast=Csv())
 
 
 # Application definition
@@ -80,16 +80,15 @@ WSGI_APPLICATION = 'moviedb.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 
+
 DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.postgresql",
-        "NAME": config("DB_NAME", default="moviedb", cast=str),
-        "USER": config("DB_USER", default="root", cast=str),
-        "PASSWORD": config("DB_PASSWORD", default="root", cast=str),
-        "HOST": config("DB_HOST", default="db", cast=str),
-        "PORT": config("DB_PORT", default=5432, cast=int),
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        }
     }
-}
+
+
 
 # Password validation
 # https://docs.djangoproject.com/en/3.0/ref/settings/#auth-password-validators

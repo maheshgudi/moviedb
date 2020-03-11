@@ -1,22 +1,13 @@
-apiVersion: apps/v1
-kind: Deployment
+apiVersion: v1
+kind: Pod
 metadata:
-  name: web-deployment
+  name: movie-db
   labels:
-    app: web
+    component: web
 spec:
-  replicas: 1
-  selector:
-    matchLabels:
-      app: web
-  template:
-    metadata:
-      labels:
-        app: web
-    spec:
-      containers:
-      - name: web
-        image: maheshgudi/kubernetes-moviedb
-        imagePullPolicy: IfNotPresent
-        ports:
-        - containerPort: 8000
+    containers:
+    - name: web
+      image: maheshgudi/moviedb
+      imagePullPolicy: IfNotPresent
+      ports:
+      - containerPort: 8000
