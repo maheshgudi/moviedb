@@ -5,9 +5,11 @@
 1. Install docker and kubectl.
 
 2. Install minikube <https://kubernetes.io/docs/tasks/tools/install-minikube/>. This requires you to also install 
-   a hypervisor. I went ahead with kvm2. 
+   a hypervisor. I went ahead with kvm-qemu. This requires Intel Virtualisation to be enabled from BIOS.
 
-3. Run `kubectl apply -f k8s-configs`
+3. Start minikube with `minikube start`
+
+4. Run `kubectl apply -f k8s-configs`
  
 
 # Installation
